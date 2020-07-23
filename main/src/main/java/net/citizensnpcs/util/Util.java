@@ -142,23 +142,11 @@ public class Util {
     }
 
     public static boolean isOffHand(PlayerInteractEntityEvent event) {
-        try {
-            return event.getHand() == org.bukkit.inventory.EquipmentSlot.OFF_HAND;
-        } catch (NoSuchMethodError e) {
-            return false;
-        } catch (NoSuchFieldError e) {
-            return false;
-        }
+        return false;
     }
 
     public static boolean isOffHand(PlayerInteractEvent event) {
-        try {
-            return event.getHand() == org.bukkit.inventory.EquipmentSlot.OFF_HAND;
-        } catch (NoSuchMethodError e) {
-            return false;
-        } catch (NoSuchFieldError e) {
-            return false;
-        }
+        return false;
     }
 
     public static String listValuesPretty(Enum<?>[] values) {
@@ -199,8 +187,7 @@ public class Util {
         if (parts.contains("*") || parts.isEmpty())
             return true;
         for (String part : Splitter.on(',').split(parts)) {
-            Material matchMaterial = SpigotUtil.isUsing1_13API() ? Material.matchMaterial(part, false)
-                    : Material.matchMaterial(part);
+            Material matchMaterial = Material.matchMaterial(part);
             if (matchMaterial == null) {
                 if (part.equals("280")) {
                     matchMaterial = Material.STICK;

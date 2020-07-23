@@ -22,46 +22,24 @@ public class EndermanEquipper implements Equipper {
             return;
         }
 
-        if (SpigotUtil.isUsing1_13API()) {
-            BlockData carried = ((Enderman) npc.getEntity()).getCarriedBlock();
-            if (carried == null || carried.getMaterial() == Material.AIR) {
-                if (hand.getType() == Material.AIR) {
-                    Messaging.sendErrorTr(equipper, Messages.EQUIPMENT_EDITOR_INVALID_BLOCK);
-                    return;
-                }
-            } else {
-                equipper.getWorld().dropItemNaturally(npc.getEntity().getLocation(),
-                        new ItemStack(carried.getMaterial(), 1));
-                ((Enderman) npc.getEntity()).setCarriedBlock(hand.getType().createBlockData());
-                // TODO: copy block data info from itemstack?
-            }
 
-            ItemStack set = hand.clone();
-            if (set.getType() != Material.AIR) {
-                set.setAmount(1);
-                hand.setAmount(hand.getAmount() - 1);
-                equipper.getInventory().setItemInHand(hand);
+        MaterialData carried = ((Enderman) npc.getEntity()).getCarriedMaterial();
+        if (carried.getItemType() == Material.AIR) {
+            if (hand.getType() == Material.AIR) {
+                Messaging.sendErrorTr(equipper, Messages.EQUIPMENT_EDITOR_INVALID_BLOCK);
+                return;
             }
-            npc.getTrait(Equipment.class).set(0, set);
         } else {
-            MaterialData carried = ((Enderman) npc.getEntity()).getCarriedMaterial();
-            if (carried.getItemType() == Material.AIR) {
-                if (hand.getType() == Material.AIR) {
-                    Messaging.sendErrorTr(equipper, Messages.EQUIPMENT_EDITOR_INVALID_BLOCK);
-                    return;
-                }
-            } else {
-                equipper.getWorld().dropItemNaturally(npc.getEntity().getLocation(), carried.toItemStack(1));
-                ((Enderman) npc.getEntity()).setCarriedMaterial(hand.getData());
-            }
-
-            ItemStack set = hand.clone();
-            if (set.getType() != Material.AIR) {
-                set.setAmount(1);
-                hand.setAmount(hand.getAmount() - 1);
-                equipper.getInventory().setItemInHand(hand);
-            }
-            npc.getTrait(Equipment.class).set(0, set);
+            equipper.getWorld().dropItemNaturally(npc.getEntity().getLocation(), carried.toItemStack(1));
+            ((Enderman) npc.getEntity()).setCarriedMaterial(hand.getData());
         }
+
+        ItemStack set = hand.clone();
+        if (set.getType() != Material.AIR) {
+            set.setAmount(1);
+            hand.setAmount(hand.getAmount() - 1);
+            equipper.getInventory().setItemInHand(hand);
+        }
+        npc.getTrait(Equipment.class).set(0, set);
     }
 }

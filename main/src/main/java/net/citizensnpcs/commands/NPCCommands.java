@@ -1539,17 +1539,6 @@ public class NPCCommands {
             Messaging.sendTr(sender, Messages.NPCS_REMOVED);
             return;
         }
-        if (args.hasValueFlag("eid")) {
-            Entity entity = Bukkit.getServer().getEntity(UUID.fromString(args.getFlag("eid")));
-            if (entity != null && (npc = CitizensAPI.getNPCRegistry().getNPC(entity)) != null) {
-                npc.destroy(sender);
-                Messaging.sendTr(sender, Messages.NPC_REMOVED, npc.getName());
-                return;
-            } else {
-                Messaging.sendErrorTr(sender, Messages.NPC_NOT_FOUND);
-                return;
-            }
-        }
         if (args.argsLength() == 2) {
             if (args.getString(1).equalsIgnoreCase("all")) {
                 if (!sender.hasPermission("citizens.admin.remove.all") && !sender.hasPermission("citizens.admin"))

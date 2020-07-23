@@ -55,14 +55,7 @@ public class ChunkCoord {
     }
 
     public void setForceLoaded(boolean b) {
-        Chunk chunk = getChunk();
-        if (chunk != null && SUPPORTS_FORCE_LOADED) {
-            try {
-                chunk.setForceLoaded(b);
-            } catch (NoSuchMethodError e) {
-                SUPPORTS_FORCE_LOADED = false;
-            }
-        }
+        SUPPORTS_FORCE_LOADED = false;
     }
 
     private static boolean SUPPORTS_FORCE_LOADED = true;

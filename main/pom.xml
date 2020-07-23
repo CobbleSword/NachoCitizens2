@@ -13,7 +13,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<craftbukkit.version>1.16.1-R0.1-SNAPSHOT</craftbukkit.version>
 		<citizensapi.version>${project.version}</citizensapi.version>
 		<powermock.version>1.4.12</powermock.version> 
 	</properties>
@@ -35,9 +34,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>${craftbukkit.version}</version>
+			<groupId>dev.cobblesword.nachospigot</groupId>
+			<artifactId>server</artifactId>
+			<version>1.8.8-R0.2-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

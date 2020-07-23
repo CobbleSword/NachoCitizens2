@@ -8,11 +8,6 @@ import net.citizensnpcs.api.trait.TraitName;
 
 @TraitName("villagertrait")
 public class VillagerTrait extends Trait {
-    @Persist
-    private int level = 1;
-    @Persist
-    private Villager.Type type;
-
     public VillagerTrait() {
         super("villagertrait");
     }
@@ -21,18 +16,6 @@ public class VillagerTrait extends Trait {
     public void run() {
         if (!(npc.getEntity() instanceof Villager))
             return;
-        if (type != null) {
-            ((Villager) npc.getEntity()).setVillagerType(type);
-        }
-        level = Math.min(5, Math.max(1, level));
-        ((Villager) npc.getEntity()).setVillagerLevel(level);
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setType(Villager.Type type) {
-        this.type = type;
-    }
 }

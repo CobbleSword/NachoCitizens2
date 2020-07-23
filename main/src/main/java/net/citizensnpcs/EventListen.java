@@ -354,7 +354,7 @@ public class EventListen implements Listener {
                                     property.keyExists("signature") ? property.getString("signature") : null));
                 }
             }
-            Material mat = SpigotUtil.isUsing1_13API() ? Material.SKELETON_SKULL : Material.valueOf("SKULL_ITEM");
+            Material mat = Material.SKULL_ITEM;
             SkullMeta meta = (SkullMeta) Bukkit.getItemFactory().getItemMeta(mat);
             NMS.setProfile(meta, profile);
             event.getItemStack().setItemMeta(meta);

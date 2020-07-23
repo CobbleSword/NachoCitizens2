@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Team;
-import org.bukkit.scoreboard.Team.Option;
-import org.bukkit.scoreboard.Team.OptionStatus;
 
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.persistence.Persist;
@@ -34,31 +32,7 @@ public class ScoreboardTrait extends Trait {
 
     public void apply(Team team, boolean nameVisibility) {
         Set<String> newTags = new HashSet<String>(tags);
-        if (SUPPORT_TAGS) {
-            try {
-                for (Iterator<String> iterator = npc.getEntity().getScoreboardTags().iterator(); iterator.hasNext();) {
-                    String oldTag = iterator.next();
-                    if (!newTags.remove(oldTag)) {
-                        iterator.remove();
-                    }
-                }
-                for (String tag : newTags) {
-                    npc.getEntity().addScoreboardTag(tag);
-                }
-            } catch (NoSuchMethodError e) {
-                SUPPORT_TAGS = false;
-            }
-        }
 
-        if (SUPPORT_TEAM_SETOPTION) {
-            try {
-                team.setOption(Option.NAME_TAG_VISIBILITY, nameVisibility ? OptionStatus.ALWAYS : OptionStatus.NEVER);
-            } catch (NoSuchMethodError e) {
-                SUPPORT_TEAM_SETOPTION = false;
-            } catch (NoClassDefFoundError e) {
-                SUPPORT_TEAM_SETOPTION = false;
-            }
-        }
         if (!SUPPORT_TEAM_SETOPTION) {
             NMS.setTeamNameTagVisible(team, nameVisibility);
         }
@@ -71,24 +45,14 @@ public class ScoreboardTrait extends Trait {
             if (SUPPORT_GLOWING_COLOR && Util.getMinecraftRevision().contains("1_12_R1")) {
                 SUPPORT_GLOWING_COLOR = false;
             }
-            if (SUPPORT_GLOWING_COLOR) {
-                try {
-                    if (team.getColor() == null || previousGlowingColor == null
-                            || (previousGlowingColor != null && color != previousGlowingColor)) {
-                        team.setColor(color);
-                        previousGlowingColor = color;
-                    }
-                } catch (NoSuchMethodError err) {
-                    SUPPORT_GLOWING_COLOR = false;
-                }
-            } else {
-                if (team.getPrefix() == null || team.getPrefix().length() == 0 || previousGlowingColor == null
-                        || (previousGlowingColor != null
-                                && !team.getPrefix().equals(previousGlowingColor.toString()))) {
-                    team.setPrefix(color.toString());
-                    previousGlowingColor = color;
-                }
+
+            if (team.getPrefix() == null || team.getPrefix().length() == 0 || previousGlowingColor == null
+                    || (previousGlowingColor != null
+                            && !team.getPrefix().equals(previousGlowingColor.toString()))) {
+                team.setPrefix(color.toString());
+                previousGlowingColor = color;
             }
+
         }
         Util.sendTeamPacketToOnlinePlayers(team, 2);
     }
@@ -102,6 +66,6 @@ public class ScoreboardTrait extends Trait {
     }
 
     private static boolean SUPPORT_GLOWING_COLOR = true;
-    private static boolean SUPPORT_TAGS = true;
+    private static boolean SUPPORT_TAGS = false;
     private static boolean SUPPORT_TEAM_SETOPTION = true;
 }

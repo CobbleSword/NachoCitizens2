@@ -121,13 +121,7 @@ public class FlyingAStarNavigationStrategy extends AbstractPathStrategy {
         if (npc.getEntity().getType() == EntityType.PLAYER) {
             ItemStack stack = ((Player) npc.getEntity()).getInventory().getChestplate();
             if (!MinecraftBlockExaminer.canStandOn(current.getBlock().getRelative(BlockFace.DOWN))) {
-                try {
-                    if (stack != null && stack.getType() == Material.ELYTRA) {
-                        PlayerAnimation.START_ELYTRA.play((Player) npc.getEntity());
-                    }
-                } catch (Exception ex) {
-                    // 1.8 compatibility
-                }
+                // 1.8 compatibility
             }
         }
 

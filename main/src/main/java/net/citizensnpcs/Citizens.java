@@ -90,7 +90,7 @@ public class Citizens extends JavaPlugin implements CitizensPlugin {
 
         @Override
         public void setTexture(String string, SkullMeta meta) {
-            UUID uuid = meta.getOwningPlayer() == null ? UUID.randomUUID() : meta.getOwningPlayer().getUniqueId();
+            UUID uuid = UUID.randomUUID();
             NMS.setProfile(meta, new GameProfile(uuid, string));
         }
     };

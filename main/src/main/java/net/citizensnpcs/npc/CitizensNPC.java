@@ -352,13 +352,6 @@ public class CitizensNPC extends AbstractNPC {
                 NMS.trySwim(getEntity());
             }
             navigator.run();
-            if (SUPPORT_GLOWING) {
-                try {
-                    getEntity().setGlowing(data().get(NPC.GLOWING_METADATA, false));
-                } catch (NoSuchMethodError e) {
-                    SUPPORT_GLOWING = false;
-                }
-            }
 
             boolean isLiving = getEntity() instanceof LivingEntity;
             if (updateCounter++ > Setting.PACKET_UPDATE_DELAY.asInt()) {
@@ -383,14 +376,6 @@ public class CitizensNPC extends AbstractNPC {
             if (isLiving) {
                 NMS.setKnockbackResistance((LivingEntity) getEntity(),
                         data().get(NPC.DEFAULT_PROTECTED_METADATA, true) ? 1D : 0D);
-            }
-
-            if (SUPPORT_SILENT && data().has(NPC.SILENT_METADATA)) {
-                try {
-                    getEntity().setSilent(Boolean.parseBoolean(data().get(NPC.SILENT_METADATA).toString()));
-                } catch (NoSuchMethodError e) {
-                    SUPPORT_SILENT = false;
-                }
             }
         } catch (Exception ex) {
             Throwable error = Throwables.getRootCause(ex);
