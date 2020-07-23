@@ -1,5 +1,7 @@
-Citizens2 README
+NachoCitizens2 README
 ================
+
+**NOTE:** This build of Citizens is only designed for NachoSpigot in a effort to allow the use of Netty  4.1 
 
 Citizens is an NPC plugin for the Bukkit API. It was first released on March 5, 2011, and has since seen numerous updates. Citizens provides an API which developers can use to create their own NPC characters. More information on the API can be found on the API page of the Citizens Wiki (https://wiki.citizensnpcs.co/API).
 
