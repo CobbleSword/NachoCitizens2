@@ -755,11 +755,11 @@ public class NMSImpl implements NMSBridge {
     @Override
     public void replaceTrackerEntry(Player player) {
         WorldServer server = (WorldServer) NMSImpl.getHandle(player).getWorld();
-        EntityTrackerEntry entry = server.getTracker().trackedEntities.get(player.getEntityId());
+        EntityTrackerEntry entry = server.getTracker().trackedEntitiesID.get(player.getEntityId());
         if (entry == null)
             return;
         PlayerlistTrackerEntry replace = new PlayerlistTrackerEntry(entry);
-        server.getTracker().trackedEntities.a(player.getEntityId(), replace);
+        server.getTracker().trackedEntitiesID.a(player.getEntityId(), replace);
         if (TRACKED_ENTITY_SET != null) {
             try {
                 Set<Object> set = (Set<Object>) TRACKED_ENTITY_SET.get(server.getTracker());
