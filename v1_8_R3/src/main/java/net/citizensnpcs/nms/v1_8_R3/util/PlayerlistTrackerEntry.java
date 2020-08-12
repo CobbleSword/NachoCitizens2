@@ -99,8 +99,8 @@ public class PlayerlistTrackerEntry extends EntityTrackerEntry {
         return false;
     }
 
-    private static Field B = NMS.getField(EntityTrackerEntry.class, "b");
-    private static Field C = NMS.getField(EntityTrackerEntry.class, "c");
+    private static Field B = NMS.getField(EntityTrackerEntry.class, "maxTrackingDistance");
+    private static Field C = NMS.getField(EntityTrackerEntry.class, "updateInterval");
     private static Field TRACKER = NMS.getField(EntityTrackerEntry.class, "tracker");
-    private static Field U = NMS.getField(EntityTrackerEntry.class, "u");
+    private static Field U = NMS.getField(EntityTrackerEntry.class, "sendVelocityUpdates");
 }

@@ -1421,7 +1421,7 @@ public class NMSImpl implements NMSBridge {
     private static final Random RANDOM = Util.getFastRandom();
     private static Field SKULL_PROFILE_FIELD;
     private static Field TEAM_FIELD;
-    private static Field TRACKED_ENTITY_SET = NMS.getField(EntityTracker.class, "c");
+    private static Field TRACKED_ENTITY_SET = NMS.getField(EntityTracker.class, "trackedEntities");
 
     static {
         try {
